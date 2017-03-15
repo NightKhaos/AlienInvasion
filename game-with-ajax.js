@@ -78,8 +78,31 @@ var getUsername = function () {
 }
 
 var postScore = function (success) {
-  var username = Game.getUsername
-  //send ajax request here
+  var username = Game.getUsername();
+  var points = Game.points;
+  var xhttp = new XMLHttpRequest();
+  var url = window.location.protocol + "//" + window.location.hostname
+          + (window.location.port ? ':' + window.location.port : '' )
+          + '/pscore'
+  var data = JSON.stringify({"Username": username, "Score": points, "Completed" : success })
+  xhttp.open("POST",url, true);
+  xhttp.setRequestHeader("Content-Type", "application/json");
+  xhttp.onreadystatechange = function () {
+    if (xhttp.readyState == 4) {
+      if (xhttp.status == 200) {
+        var outputJSON = JSON.parse(xhttp.responseText);
+        console.log('Logged score with id ' + outputJSON.Id)
+      };
+      if (xhttp.status == 400) {
+        var outputJSON = JSON.parse(xhttp.responseText);
+        console.log('Failed to send score, got error: ' + outputJSON.Error)
+      };
+      if (xhttp.status == 503) {
+        console.log('Got 503 trying to score')
+      }
+    };
+  };
+  xhttp.send(data);
 }
 
 var playGame = function() {
