@@ -92,14 +92,14 @@ var playGame = function() {
 
 var winGame = function () {
   postScore(true)
-  Game.setBoard(3,new TitleScreen("You win!", 
+  Game.setBoard(3,new TitleScreen("You survived!", 
                                   "Press fire to play again",
                                   playGame));
 };
 
 var loseGame = function () {
   postScore(false)
-  Game.setBoard(3,new TitleScreen("You lose!", 
+  Game.setBoard(3,new TitleScreen("You died!", 
                                   "Press fire to play again",
                                   playGame));
 };
