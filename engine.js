@@ -22,10 +22,10 @@
             clearTimeout(id);
         };
 }());
-  
 
-var Game = new function() {                                                                  
+var Game = new function() {                                                               
   var boards = [];
+  username = '';
 
   // Game Initialization
   this.initialize = function(canvasElementId,sprite_data,callback) {
@@ -95,7 +95,9 @@ var Game = new function() {
   // Change an active game board
   this.setBoard = function(num,board) { boards[num] = board; };
 
-
+  this.setUsername = function (name) { username = name; }
+  this.getUsername = function () { return username; }
+  
   this.setupMobile = function() {
     var container = document.getElementById("container"),
         hasTouch =  !!('ontouchstart' in window),
@@ -162,7 +164,7 @@ var SpriteSheet = new function() {
   return this;
 };
 
-var TitleScreen = function TitleScreen(title,subtitle,callback) {
+var TitleScreen = function TitleScreen(title,subtitle,callback,fn) {
   var up = false;
   this.step = function(dt) {
     if(!Game.keys['fire']) up = true;
@@ -178,7 +180,11 @@ var TitleScreen = function TitleScreen(title,subtitle,callback) {
 
     ctx.font = "bold 20px bangers";
     var measure2 = ctx.measureText(subtitle);
-    ctx.fillText(subtitle,Game.width/2 - measure2.width/2,Game.height/2 + 40);
+    ctx.fillText(subtitle, Game.width / 2 - measure2.width / 2, Game.height / 2 + 40);
+
+    if (fn) {
+      fn()
+    }
   };
 };
 
