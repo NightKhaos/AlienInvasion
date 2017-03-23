@@ -1,19 +1,14 @@
-Alien Invasion
+Docker Invasion
 ==============
-This is the sample game that is built in the first three Chapter of
-mobile HTML5 Game Development.
+This is the sample game that is based on an open source [game by cykod](https://github.com/cykod/AlienInvasion)
 
 It is released under both the GPL and MIT license to do with what you will.
 
-Playable Version: 
+Playable Version hosted by Cykod:
 http://cykod.github.com/AlienInvasion/
 
 Bit.ly link for mobile: 
 http://bit.ly/html5-invasion
-
-
-If you make an interesting fork or enhancement of the game, let me know and it'll get
-linked to here. This original repo will stay matching the code in the book.
 
 For more  [HTML5 Game Development](http://www.html5gamedevelopment.org) resources, see:
 
