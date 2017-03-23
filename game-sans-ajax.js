@@ -39,10 +39,9 @@ var startGame = function() {
     Game.setBoard(1,new Starfield(50,0.6,100));
     Game.setBoard(2,new Starfield(100,1.0,50));
   }  
-  Game.setBoard(3, new TitleScreen("Docker Invasion",
-   "Enter a username & press fire to start", 
-    null,
-    getUsername));
+  Game.setBoard(3,new TitleScreen("Docker Invasion", 
+                                  "Press fire to start playing",
+                                  playGame));
 };
 
 var level1 = [
@@ -57,30 +56,7 @@ var level1 = [
   [ 22000,  25000, 400, 'wiggle', { x: 100 }]
 ];
 
-var getUsername = function () {
-  var userInput = document.getElementById('username');
-  userInput.type = 'text';
 
-  if (Game.keys['fire'] && userInput.value) {
-    re = new RegExp(/^[a-zA-Z0-9]{3,10}$/)
-    if (userInput.value.match(re)) {
-      Game.setUsername(userInput.value);
-      userInput.type = 'hidden';
-      playGame();
-    } else {
-    Game.setBoard(3, new TitleScreen("Username Error!",
-      "3-10 alphanumeric characters only", 
-        null,
-        getUsername));
-      
-    }
-  }
-}
-
-var postScore = function (success) {
-  var username = Game.getUsername
-  //send ajax request here
-}
 
 var playGame = function() {
   var board = new GameBoard();
@@ -90,20 +66,17 @@ var playGame = function() {
   Game.setBoard(5,new GamePoints(0));
 };
 
-var winGame = function () {
-  postScore(true)
+var winGame = function() {
   Game.setBoard(3,new TitleScreen("You survived!", 
                                   "Press fire to play again",
                                   playGame));
 };
 
-var loseGame = function () {
-  postScore(false)
+var loseGame = function() {
   Game.setBoard(3,new TitleScreen("You died!", 
                                   "Press fire to play again",
                                   playGame));
 };
-
 
 var Starfield = function(speed,opacity,numStars,clear) {
 
